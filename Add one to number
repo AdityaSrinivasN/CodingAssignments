@@ -12,3 +12,21 @@ def addOneToNumberHelper(arr, n, i, carry):
     carry = d // 10
 
     addOneToNumberHelper(arr, n, i + 1, carry)
+
+def addOneToNumber(arr):
+
+    # reverse the given array
+    arr.reverse()
+
+    # remove leading zeros
+    while (len(arr) > 1 and arr[-1] == 0):
+        arr.pop()
+
+    n = len(arr)
+
+    addOneToNumberHelper(arr, n, 0, 1)
+
+    # reverse the array
+    arr.reverse()
+
+    return arr
