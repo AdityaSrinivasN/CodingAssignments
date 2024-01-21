@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int maxProfit(vector<int> &prices) {
+        return maxProfit(prices, 0, prices.size());
+    }
+private:
+    int maxProfit(vector<int> &prices, int lo, int hi) {
+        if (hi - lo < 2) return 0;
+        
+        int mid = lo + (hi - lo) / 2;
+        int left = maxProfit(prices, lo, mid);
+        int right = maxProfit(prices, mid, hi);
+        
+        int buy = prices[lo];
+        for (int i = lo + 1; i < mid; i++) {
+            if (prices[i] < buy) buy = prices[i];
+        }
+        
+        int sell = prices[mid];
+        for (int i = mid + 1; i < hi; i++) {
+            if (prices[i] > sell) sell = prices[i];
+        }
+        
+        if (sell > buy) {
+            int profit = sell - buy;
+            return max(left, max(profit, right));
+        } else {
+            return max(left, right);
+        }
+    }
+}
+
