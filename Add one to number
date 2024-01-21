@@ -1,0 +1,14 @@
+def addOneToNumberHelper(arr, n, i, carry):
+
+    # base case
+    if (i == n):
+        if (carry != 0):
+            arr.append(carry)
+
+        return
+
+    d = arr[i] + carry
+    arr[i] = d % 10
+    carry = d // 10
+
+    addOneToNumberHelper(arr, n, i + 1, carry)
